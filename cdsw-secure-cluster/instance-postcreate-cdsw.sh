@@ -12,17 +12,17 @@ exit 0
 fi
 
 # install CDSW
-cd /etc/yum.repos.d
-cat << __EOF__ > cloudera-cdsw.repo
-[cloudera-cdsw]
+#cd /etc/yum.repos.d
+#cat << __EOF__ > cloudera-cdsw.repo
+#[cloudera-cdsw]
 # Packages for Cloudera's Distribution for data science workbench, Version 1, on RedHat	or CentOS 7 x86_64
-name=Cloudera's Distribution for cdsw, Version 1
-baseurl=https://archive.cloudera.com/cdsw/1/redhat/7/x86_64/cdsw/1.2.0/
-gpgkey =https://archive.cloudera.com/cdsw/1/redhat/7/x86_64/cdsw/RPM-GPG-KEY-cloudera
-gpgcheck = 1
-__EOF__
-rpm --import https://archive.cloudera.com/cdsw/1/redhat/7/x86_64/cdsw/RPM-GPG-KEY-cloudera
-yum install -y cloudera-data-science-workbench
+#name=Cloudera's Distribution for cdsw, Version 1
+#baseurl=https://archive.cloudera.com/cdsw/1/redhat/7/x86_64/cdsw/1.2.0/
+#gpgkey =https://archive.cloudera.com/cdsw/1/redhat/7/x86_64/cdsw/RPM-GPG-KEY-cloudera
+#gpgcheck = 1
+#__EOF__
+#rpm --import https://archive.cloudera.com/cdsw/1/redhat/7/x86_64/cdsw/RPM-GPG-KEY-cloudera
+#yum install -y cloudera-data-science-workbench
 
 cd /root
 
@@ -118,17 +118,17 @@ fi
 
 
 # Configuring /etc/cdsw/config/cdsw.conf
-perl -pi -e "s/DOMAIN=.*/DOMAIN=\"${DOMAIN}\"/" /etc/cdsw/config/cdsw.conf
-perl -pi -e "s/MASTER_IP=.*/MASTER_IP=\"${MASTER_IP}\"/" /etc/cdsw/config/cdsw.conf
-perl -pi -e "s|DOCKER_BLOCK_DEVICES=.*|DOCKER_BLOCK_DEVICES=\"${DOCKER_BLOCK_DEVICES}\"|" /etc/cdsw/config/cdsw.conf
-perl -pi -e "s|APPLICATION_BLOCK_DEVICE=.*|APPLICATION_BLOCK_DEVICE=\"${APPLICATION_BLOCK_DEVICE}\"|" /etc/cdsw/config/cdsw.conf
-perl -pi -e "s|JAVA_HOME=.*|JAVA_HOME=\"${JAVA_HOME}\"|" /etc/cdsw/config/cdsw.conf
-for dev in $(grep '^/dev' /etc/fstab | cut -f1 -d' '); do umount $dev; done
-sed -i '/^\/dev/d' /etc/fstab
+#perl -pi -e "s/DOMAIN=.*/DOMAIN=\"${DOMAIN}\"/" /etc/cdsw/config/cdsw.conf
+#perl -pi -e "s/MASTER_IP=.*/MASTER_IP=\"${MASTER_IP}\"/" /etc/cdsw/config/cdsw.conf
+#perl -pi -e "s|DOCKER_BLOCK_DEVICES=.*|DOCKER_BLOCK_DEVICES=\"${DOCKER_BLOCK_DEVICES}\"|" /etc/cdsw/config/cdsw.conf
+#perl -pi -e "s|APPLICATION_BLOCK_DEVICE=.*|APPLICATION_BLOCK_DEVICE=\"${APPLICATION_BLOCK_DEVICE}\"|" /etc/cdsw/config/cdsw.conf
+#perl -pi -e "s|JAVA_HOME=.*|JAVA_HOME=\"${JAVA_HOME}\"|" /etc/cdsw/config/cdsw.conf
+#for dev in $(grep '^/dev' /etc/fstab | cut -f1 -d' '); do umount $dev; done
+#sed -i '/^\/dev/d' /etc/fstab
 
 # cdsw init - preinstall-validation - doesn't allow SELinux "permissive"
-perl -pi -e "s/getenforce/#getenforce/" /etc/cdsw/scripts/preinstall-validation.sh
-perl -pi -e "s/SELINUX=.*/SELINUX=disabled/" /etc/selinux/config
+#perl -pi -e "s/getenforce/#getenforce/" /etc/cdsw/scripts/preinstall-validation.sh
+#perl -pi -e "s/SELINUX=.*/SELINUX=disabled/" /etc/selinux/config
 
 # cdsw init - preinstall-validation - doesn't allow IPv6
 echo "net.ipv6.conf.all.disable_ipv6=0" >> /etc/sysctl.conf
@@ -143,16 +143,16 @@ rm -rf /etc/modprobe.d/iptables-blacklist.conf
 modprobe iptable_filter
 
 # CDSW init
-echo | cdsw init
+#echo | cdsw init
 
 # Waiting for CDSW is up
-for i in `seq 30` : # 30*10sec -> 5min
-do
-    cdsw status
-    if [ $? -eq 0 ]; then
-        echo "CDSW is now up and ready."
-        break
-    fi
-    echo "Waiting for CDSW is up.... 10 seconds."
-    sleep 10
-done
+#for i in `seq 30` : # 30*10sec -> 5min
+#do
+#    cdsw status
+#    if [ $? -eq 0 ]; then
+#        echo "CDSW is now up and ready."
+#        break
+#    fi
+#    echo "Waiting for CDSW is up.... 10 seconds."
+#    sleep 10
+#done
