@@ -1,3 +1,13 @@
+# This repository is no longer updated
+
+This repository has been merged into [Cloudera Demo Environment](https://github.com/takabow/cloudera-demo-env/).
+
+Please use [Cloudera Demo Environment](https://github.com/takabow/cloudera-demo-env/).
+
+
+----
+
+
 # Cloudera Data Science Workbench Demo Environment
 Install scripts of Cloudera Data Science Workbench (CDSW) with CDH secure cluster on cloud.
 This is for Demo purposes only. Don't use for production.
